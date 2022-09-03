@@ -1,7 +1,7 @@
 CREATE TABLE aluno(
 	id integer NOT NULL,
 	nome varchar(200) NOT NULL,
-	cpf varchar(11),
+	cpf varchar(14),
 	sexo char(1),
 	data_nascimento date,
 	email varchar(300),
