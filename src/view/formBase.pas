@@ -13,10 +13,12 @@ type
     btnConfirmar: TButton;
     btSair: TButton;
     btnExcluir: TButton;
+    btnNovo: TButton;
     procedure btSairClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnNovoClick(Sender: TObject);
   private
     FDm: TDmBase;
     { Private declarations }
@@ -49,6 +51,7 @@ begin
 
   TMessageBox.informar('Registro salvo com sucesso', miInformacao);
   self.dm.queryCadastro.Close;
+  self.dm.queryCadastro.ParamByName('ID').Clear;
   self.dm.queryCadastro.Open;
 end;
 
@@ -67,6 +70,14 @@ begin
 
   TMessageBox.informar('Registro excluido com sucesso', miInformacao);
   self.dm.queryCadastro.Close;
+  self.dm.queryCadastro.ParamByName('ID').Clear;
+  self.dm.queryCadastro.Open;
+end;
+
+procedure TfrmBase.btnNovoClick(Sender: TObject);
+begin
+  self.dm.queryCadastro.Close;
+  self.dm.queryCadastro.ParamByName('ID').Clear;
   self.dm.queryCadastro.Open;
 end;
 

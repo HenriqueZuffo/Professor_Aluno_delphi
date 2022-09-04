@@ -2,6 +2,7 @@ inherited dmProfessor: TdmProfessor
   OldCreateOrder = True
   inherited queryCadastro: TFDQuery
     AfterOpen = queryCadastroAfterOpen
+    AfterClose = queryCadastroAfterClose
     SQL.Strings = (
       'select * '
       '  from professor'
@@ -61,10 +62,6 @@ inherited dmProfessor: TdmProfessor
     end
   end
   object queryProfessorAluno: TFDQuery
-    IndexFieldNames = 'ID_ALUNO'
-    MasterSource = dsCadastro
-    MasterFields = 'ID'
-    DetailFields = 'ID_ALUNO'
     Connection = dmConexaoBanco.base
     SQL.Strings = (
       'SELECT pa.*,'
@@ -73,9 +70,17 @@ inherited dmProfessor: TdmProfessor
       '       cast(null as double precision) as menor_nota,'
       '       cast(null as double precision) as media_nota'
       '  FROM PROFESSOR_ALUNO pa'
-      ' INNER JOIN aluno a ON a.ID = pa.ID_ALUNO')
+      ' INNER JOIN aluno a ON a.ID = pa.ID_ALUNO'
+      ' where id_professor = :idprofessor')
     Left = 128
     Top = 264
+    ParamData = <
+      item
+        Name = 'IDPROFESSOR'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
     object queryProfessorAlunoID_PROFESSOR: TIntegerField
       FieldName = 'ID_PROFESSOR'
       Origin = 'ID_PROFESSOR'
@@ -123,7 +128,6 @@ inherited dmProfessor: TdmProfessor
       FieldName = 'NOME_ALUNO'
       Origin = 'NOME'
       ProviderFlags = []
-      ReadOnly = True
       Size = 200
     end
     object queryProfessorAlunoMAIOR_NOTA: TFloatField
@@ -131,7 +135,6 @@ inherited dmProfessor: TdmProfessor
       FieldName = 'MAIOR_NOTA'
       Origin = 'MAIOR_NOTA'
       ProviderFlags = []
-      ReadOnly = True
       DisplayFormat = '0.00,'
     end
     object queryProfessorAlunoMENOR_NOTA: TFloatField
@@ -139,7 +142,6 @@ inherited dmProfessor: TdmProfessor
       FieldName = 'MENOR_NOTA'
       Origin = 'MENOR_NOTA'
       ProviderFlags = []
-      ReadOnly = True
       DisplayFormat = '0.00,'
     end
     object queryProfessorAlunoMEDIA_NOTA: TFloatField
@@ -147,7 +149,6 @@ inherited dmProfessor: TdmProfessor
       FieldName = 'MEDIA_NOTA'
       Origin = 'MEDIA_NOTA'
       ProviderFlags = []
-      ReadOnly = True
       DisplayFormat = '0.00,'
     end
   end

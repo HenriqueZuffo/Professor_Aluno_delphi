@@ -3,17 +3,28 @@ inherited frmProfessor: TfrmProfessor
   ClientHeight = 703
   ClientWidth = 662
   FormStyle = fsMDIChild
+  Position = poMainFormCenter
   Visible = True
+  OnShow = FormShow
   ExplicitWidth = 678
   ExplicitHeight = 742
   PixelsPerInch = 96
   TextHeight = 16
   inherited pnTop: TPanel
     Width = 662
+    ExplicitWidth = 662
+    inherited btSair: TButton
+      TabOrder = 2
+    end
+    inherited btnExcluir: TButton
+      TabOrder = 1
+    end
   end
   inherited pnCorpoTela: TPanel
     Width = 662
     Height = 670
+    ExplicitWidth = 662
+    ExplicitHeight = 670
     object gbAlunos: TGroupBox
       Left = 0
       Top = 208
@@ -21,8 +32,7 @@ inherited frmProfessor: TfrmProfessor
       Height = 462
       Align = alBottom
       Caption = 'Alunos'
-      TabOrder = 0
-      ExplicitWidth = 795
+      TabOrder = 1
       object pnBtnsAlunos: TPanel
         Left = 579
         Top = 18
@@ -30,10 +40,7 @@ inherited frmProfessor: TfrmProfessor
         Height = 442
         Align = alRight
         BevelOuter = bvNone
-        TabOrder = 0
-        ExplicitLeft = 718
-        ExplicitTop = 111
-        ExplicitHeight = 214
+        TabOrder = 1
         object btnExcluirAluno: TButton
           Left = 0
           Top = 82
@@ -42,11 +49,11 @@ inherited frmProfessor: TfrmProfessor
           Align = alTop
           Caption = 'Excluir'
           Enabled = False
-          TabOrder = 0
+          TabOrder = 2
           OnClick = btnExcluirAlunoClick
-          ExplicitTop = 0
         end
         object btnIncluirAluno: TButton
+          Tag = 1
           Left = 0
           Top = 41
           Width = 81
@@ -55,17 +62,17 @@ inherited frmProfessor: TfrmProfessor
           Caption = 'Incluir'
           TabOrder = 1
           OnClick = btnIncluirAlunoClick
-          ExplicitTop = 8
         end
         object btnCalcular: TButton
+          Tag = 1
           Left = 0
           Top = 0
           Width = 81
           Height = 41
           Align = alTop
           Caption = 'Calcular'
-          TabOrder = 2
-          ExplicitTop = 8
+          TabOrder = 0
+          OnClick = btnCalcularClick
         end
       end
       object pnInfoAlunos: TPanel
@@ -75,11 +82,7 @@ inherited frmProfessor: TfrmProfessor
         Height = 442
         Align = alClient
         BevelOuter = bvNone
-        TabOrder = 1
-        ExplicitLeft = 718
-        ExplicitTop = 111
-        ExplicitWidth = 81
-        ExplicitHeight = 214
+        TabOrder = 0
         object pnCamposAlunos: TPanel
           Left = 0
           Top = 0
@@ -159,6 +162,7 @@ inherited frmProfessor: TfrmProfessor
             Caption = 'M'#233'dia'
           end
           object btnConsultaAluno: TSpeedButton
+            Tag = 1
             Left = 98
             Top = 31
             Width = 25
@@ -194,9 +198,10 @@ inherited frmProfessor: TfrmProfessor
             Font.Style = []
             ParentFont = False
             ReadOnly = True
-            TabOrder = 1
+            TabOrder = 2
           end
           object edtdb_notaPrimeiroBimestre: TDBEdit
+            Tag = 1
             Left = 32
             Top = 111
             Width = 114
@@ -209,9 +214,10 @@ inherited frmProfessor: TfrmProfessor
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 3
           end
           object edtdb_notaSegundoBimestre: TDBEdit
+            Tag = 1
             Left = 149
             Top = 111
             Width = 145
@@ -224,9 +230,10 @@ inherited frmProfessor: TfrmProfessor
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 4
           end
           object edtdb_notaTerceiroBimestre: TDBEdit
+            Tag = 1
             Left = 297
             Top = 111
             Width = 123
@@ -239,18 +246,20 @@ inherited frmProfessor: TfrmProfessor
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 5
           end
           object edtdb_notaQuartoBimestre: TDBEdit
+            Tag = 1
             Left = 423
             Top = 111
             Width = 127
             Height = 24
             DataField = 'NOTA_QUARTO_BIMESTRE'
             DataSource = dmProfessor.dsProfessorAluno
-            TabOrder = 5
+            TabOrder = 6
           end
           object edtdb_ano: TDBEdit
+            Tag = 1
             Left = 423
             Top = 31
             Width = 127
@@ -263,7 +272,7 @@ inherited frmProfessor: TfrmProfessor
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 6
+            TabOrder = 1
           end
           object edtdb_maiorNota: TDBEdit
             Left = 400
@@ -281,7 +290,7 @@ inherited frmProfessor: TfrmProfessor
             Font.Style = []
             ParentFont = False
             ReadOnly = True
-            TabOrder = 7
+            TabOrder = 9
           end
           object edtdb_menorNota: TDBEdit
             Left = 32
@@ -299,7 +308,7 @@ inherited frmProfessor: TfrmProfessor
             Font.Style = []
             ParentFont = False
             ReadOnly = True
-            TabOrder = 8
+            TabOrder = 7
           end
           object edtdb_mediaNota: TDBEdit
             Left = 216
@@ -317,7 +326,7 @@ inherited frmProfessor: TfrmProfessor
             Font.Style = []
             ParentFont = False
             ReadOnly = True
-            TabOrder = 9
+            TabOrder = 8
           end
         end
         object pnGridAlunos: TPanel
@@ -328,11 +337,8 @@ inherited frmProfessor: TfrmProfessor
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 718
-          ExplicitTop = 111
-          ExplicitWidth = 81
-          ExplicitHeight = 214
           object DBGrid1: TDBGrid
+            Tag = 1
             Left = 0
             Top = 0
             Width = 577
@@ -367,6 +373,7 @@ inherited frmProfessor: TfrmProfessor
                 FieldName = 'ANO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Ano'
+                Width = 64
                 Visible = True
               end
               item
@@ -414,6 +421,7 @@ inherited frmProfessor: TfrmProfessor
                 FieldName = 'MEDIA_NOTA'
                 Title.Alignment = taCenter
                 Title.Caption = 'M'#233'dia'
+                Width = 64
                 Visible = True
               end
               item
@@ -435,9 +443,7 @@ inherited frmProfessor: TfrmProfessor
       Height = 208
       Align = alClient
       BevelOuter = bvNone
-      TabOrder = 1
-      ExplicitWidth = 795
-      ExplicitHeight = 225
+      TabOrder = 0
       object lbl_edtdb_id: TLabel
         Left = 24
         Top = 8
@@ -493,6 +499,7 @@ inherited frmProfessor: TfrmProfessor
         Width = 25
         Height = 24
         Caption = '...'
+        OnClick = btnConsultaProfessorClick
       end
       object edtdb_id: TDBEdit
         Left = 24
@@ -527,7 +534,7 @@ inherited frmProfessor: TfrmProfessor
         Height = 24
         DataField = 'DISCIPLINA'
         DataSource = dmProfessor.dsCadastro
-        TabOrder = 2
+        TabOrder = 5
       end
       object edtdb_dtNascimento: TDBEdit
         Left = 289
@@ -542,7 +549,7 @@ inherited frmProfessor: TfrmProfessor
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
       end
       object edtdb_sexo: TDBEdit
         Left = 141
@@ -557,7 +564,7 @@ inherited frmProfessor: TfrmProfessor
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
       end
       object edtdb_cpf: TDBEdit
         Left = 24
@@ -572,7 +579,7 @@ inherited frmProfessor: TfrmProfessor
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 2
       end
       object edtdb_email: TDBEdit
         Left = 24

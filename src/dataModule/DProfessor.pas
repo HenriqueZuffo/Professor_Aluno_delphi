@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, DBase, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uConexaoBanco, uProfessor;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uConexaoBanco, uProfessor,
+  FireDAC.Phys.SQLiteVDataSet;
 
 type
   TdmProfessor = class(TdmBase)
@@ -31,6 +32,7 @@ type
     queryProfessorAlunoMENOR_NOTA: TFloatField;
     queryProfessorAlunoMEDIA_NOTA: TFloatField;
     procedure queryProfessorAlunoID_ALUNOValidate(Sender: TField);
+    procedure queryCadastroAfterClose(DataSet: TDataSet);
     procedure queryCadastroAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
@@ -66,10 +68,22 @@ begin
   end;
 end;
 
+procedure TdmProfessor.queryCadastroAfterClose(DataSet: TDataSet);
+begin
+  inherited;
+  queryProfessorAluno.Close;
+  queryProfessorAluno.ParamByName('IDPROFESSOR').Clear;
+end;
+
 procedure TdmProfessor.queryCadastroAfterOpen(DataSet: TDataSet);
 begin
   inherited;
-  queryProfessorAluno.Open;
+  queryProfessorAluno.close;
+  queryProfessorAluno.ParamByName('IDPROFESSOR').Clear;
+  if queryCadastroID.AsInteger > 0 then begin
+    queryProfessorAluno.ParamByName('IDPROFESSOR').AsInteger := queryCadastroID.AsInteger;
+    queryProfessorAluno.Open;
+  end;
 end;
 
 procedure TdmProfessor.queryProfessorAlunoID_ALUNOValidate(Sender: TField);
@@ -101,9 +115,9 @@ begin
     professor.email := queryCadastroEMAIL.AsString;
     professor.disciplina := queryCadastroDISCIPLINA.AsString;
 
-    queryProfessorAluno.First;
-    while not queryProfessorAluno.Eof do begin
-      try
+    if queryProfessorAluno.Active then begin
+      queryProfessorAluno.First;
+      while not queryProfessorAluno.Eof do begin
         alunoProfessor := TProfessor.TAlunoProfessor.Create;
         alunoProfessor.id_aluno := queryProfessorAlunoID_ALUNO.AsInteger;
         alunoProfessor.ano := queryProfessorAlunoANO.AsInteger;
@@ -113,12 +127,9 @@ begin
         alunoProfessor.notaQuartoBimestre := queryProfessorAlunoNOTA_QUARTO_BIMESTRE.AsFloat;
 
         professor.alunosProfessor.Add(alunoProfessor);
-      finally
-        FreeAndNil(alunoProfessor);
+        queryProfessorAluno.Next;
       end;
-      queryProfessorAluno.Next;
     end;
-
 
     try
       dmConexaoBanco.base.StartTransaction;
@@ -132,8 +143,6 @@ begin
     end;
   finally
     FreeAndNil(Professor);
-
-    if Assigned(alunoProfessor) then FreeAndNil(alunoProfessor);
   end;
 end;
 

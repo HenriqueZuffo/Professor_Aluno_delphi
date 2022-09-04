@@ -22,7 +22,7 @@ object frmBase: TfrmBase
     BevelOuter = bvNone
     TabOrder = 1
     object btnConfirmar: TButton
-      Left = 0
+      Left = 75
       Top = 0
       Width = 75
       Height = 33
@@ -30,9 +30,10 @@ object frmBase: TfrmBase
       Caption = 'Confirmar'
       TabOrder = 0
       OnClick = btnConfirmarClick
+      ExplicitLeft = 0
     end
     object btSair: TButton
-      Left = 150
+      Left = 225
       Top = 0
       Width = 75
       Height = 33
@@ -40,16 +41,31 @@ object frmBase: TfrmBase
       Caption = 'Sair'
       TabOrder = 1
       OnClick = btSairClick
+      ExplicitLeft = 150
     end
     object btnExcluir: TButton
-      Left = 75
+      Left = 150
       Top = 0
       Width = 75
       Height = 33
       Align = alLeft
       Caption = 'Excluir'
+      Enabled = False
       TabOrder = 2
       OnClick = btnExcluirClick
+      ExplicitLeft = 75
+    end
+    object btnNovo: TButton
+      Left = 0
+      Top = 0
+      Width = 75
+      Height = 33
+      Align = alLeft
+      Caption = 'Novo'
+      TabOrder = 3
+      OnClick = btnNovoClick
+      ExplicitLeft = -21
+      ExplicitTop = -6
     end
   end
   object pnCorpoTela: TPanel

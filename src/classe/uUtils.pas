@@ -5,6 +5,8 @@ interface
 uses
   Data.DB;
 
+function iif(const AExpressao: Boolean; const ATrue, AFalse: Variant): Variant;
+
 type
   TMessageBoxOption = (moSim, moNao, moCancelar, moSimParaTodos, moNaoParaTodos);
   TMessageBoxIcone = (miErro, miPergunta, miAtencao, miInformacao);
@@ -20,7 +22,13 @@ implementation
 
 uses
   Winapi.Windows, Vcl.Forms, System.UITypes;
-
+function iif(const AExpressao: Boolean; const ATrue, AFalse: Variant): Variant;
+begin
+  if AExpressao then
+    Result := ATrue
+  else
+    Result := AFalse;
+end;
 { TMessageBox }
 
 class function TMessageBox.confirmar(const AMensagem: string; AFocus: TMessageBoxOption; AIcone : TMessageBoxIcone): TMessageBoxOption;

@@ -16,7 +16,9 @@ uses
   DAluno in 'src\dataModule\DAluno.pas' {dmAluno: TDataModule},
   formProfessor in 'src\view\formProfessor.pas' {frmProfessor},
   DProfessor in 'src\dataModule\DProfessor.pas' {dmProfessor: TDataModule},
-  formConsAluno in 'src\view\formConsAluno.pas' {frmConsAluno};
+  formConsAluno in 'src\view\formConsAluno.pas' {frmConsAluno},
+  formConsProfessor in 'src\view\formConsProfessor.pas' {frmConsProfessor},
+  uCalculo in 'src\classe\uCalculo.pas';
 
 {$R *.res}
 

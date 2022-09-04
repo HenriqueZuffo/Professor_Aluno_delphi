@@ -1,5 +1,5 @@
-inherited frmConsAluno: TfrmConsAluno
-  Caption = 'Consulta de Aluno'
+inherited frmConsProfessor: TfrmConsProfessor
+  Caption = 'Consulta Professor'
   PixelsPerInch = 96
   TextHeight = 16
   inherited pnTop: TPanel
@@ -8,20 +8,15 @@ inherited frmConsAluno: TfrmConsAluno
     end
   end
   inherited pnGrid: TPanel
-    ExplicitLeft = 0
-    ExplicitTop = 81
-    ExplicitWidth = 635
-    ExplicitHeight = 185
     inherited dbGridConsulta: TDBGrid
       DataSource = DataSource1
       ReadOnly = True
       Columns = <
         item
-          Alignment = taRightJustify
           Expanded = False
           FieldName = 'ID'
           Title.Alignment = taCenter
-          Width = 71
+          Title.Caption = 'Professor'
           Visible = True
         end
         item
@@ -29,42 +24,41 @@ inherited frmConsAluno: TfrmConsAluno
           FieldName = 'NOME'
           Title.Alignment = taCenter
           Title.Caption = 'Nome'
-          Width = 200
+          Width = 250
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'DATA_NASCIMENTO'
+          FieldName = 'DISCIPLINA'
           Title.Alignment = taCenter
-          Title.Caption = 'Dt. Nascimento'
-          Width = 133
-          Visible = True
-        end
-        item
-          Alignment = taRightJustify
-          Expanded = False
-          FieldName = 'SERIE'
-          Title.Alignment = taCenter
-          Title.Caption = 'S'#233'rie'
-          Width = 99
+          Title.Caption = 'Disciplina'
+          Width = 150
           Visible = True
         end>
-    end
-  end
-  inherited pnRodaPe: TPanel
-    inherited btnImportar: TButton
-      ExplicitLeft = 560
-      ExplicitTop = 0
-      ExplicitHeight = 33
     end
   end
   inherited queryConsulta: TFDQuery
     SQL.Strings = (
       'select id,'
       '       nome,'
-      '       data_nascimento,'
-      '       serie  '
-      '  from aluno'
-      ' ')
+      '       disciplina '
+      '  from professor')
+    object queryConsultaID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = []
+    end
+    object queryConsultaDISCIPLINA: TStringField
+      FieldName = 'DISCIPLINA'
+      Origin = 'NOME'
+      ProviderFlags = []
+      Size = 200
+    end
+    object queryConsultaNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      ProviderFlags = []
+      Size = 200
+    end
   end
 end

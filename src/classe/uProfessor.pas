@@ -47,10 +47,13 @@ uses
 constructor TProfessor.create(ANome: string);
 begin
   inherited;
+
+  alunosProfessor := TList<TAlunoProfessor>.Create;
 end;
 
 destructor TProfessor.destroy;
 begin
+  FreeAndNil(alunosProfessor);
   inherited;
 end;
 
@@ -135,8 +138,8 @@ procedure TProfessor.salvar;
 
   procedure inserirAluno;
   const
-    query = 'insert into professor_aluno(id_professor, id_aluno, ano, nota_primeiro_bimestre, nota_segundo_bismestre, nota_terceiro_bismestre, nota_quarto_bismestre) ' +
-            '                     values(:id_professor, :id_aluno, :ano, :nota_primeiro_bimestre, :nota_segundo_bismestre, :nota_terceiro_bismestre, :nota_quarto_bismestre)';
+    query = 'insert into professor_aluno(id_professor, id_aluno, ano, nota_primeiro_bimestre, nota_segundo_bimestre, nota_terceiro_bimestre, nota_quarto_bimestre) ' +
+            '                     values(:id_professor, :id_aluno, :ano, :nota_primeiro_bimestre, :nota_segundo_bimestre, :nota_terceiro_bimestre, :nota_quarto_bimestre)';
   var
     i: integer;
   begin
@@ -155,9 +158,6 @@ procedure TProfessor.salvar;
     end;
 
   end;
-
-var
-  i: integer;
 begin
   inherited;
 
