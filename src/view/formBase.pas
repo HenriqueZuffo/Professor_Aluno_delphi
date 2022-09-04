@@ -47,7 +47,7 @@ begin
     end;
   end;
 
-  TMessageBox.informar('Registro salvo com sucesso');
+  TMessageBox.informar('Registro salvo com sucesso', miInformacao);
   self.dm.queryCadastro.Close;
   self.dm.queryCadastro.Open;
 end;
@@ -65,7 +65,7 @@ begin
     end;
   end;
 
-  TMessageBox.informar('Registro excluido com sucesso');
+  TMessageBox.informar('Registro excluido com sucesso', miInformacao);
   self.dm.queryCadastro.Close;
   self.dm.queryCadastro.Open;
 end;

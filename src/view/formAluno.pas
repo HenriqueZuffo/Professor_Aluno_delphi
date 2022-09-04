@@ -21,9 +21,9 @@ type
     edtdb_dtNascimento: TDBEdit;
     lbl_edtdb_dtNascimento: TLabel;
     lbl_cmbdb_sexo: TLabel;
-    cmbdb_sexo: TDBComboBox;
     lbl_edtdb_serie: TLabel;
     edtdb_serie: TDBEdit;
+    edtdb_sexo: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultaAlunoClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);

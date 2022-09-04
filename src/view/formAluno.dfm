@@ -1,16 +1,22 @@
 inherited frmAluno: TfrmAluno
   Caption = 'Aluno'
+  ClientWidth = 570
+  Constraints.MinHeight = 338
+  Constraints.MinWidth = 586
   FormStyle = fsMDIChild
   Position = poMainFormCenter
   Visible = True
+  ExplicitWidth = 586
   PixelsPerInch = 96
   TextHeight = 16
   inherited pnTop: TPanel
+    Width = 570
     inherited btnExcluir: TButton
       Enabled = False
     end
   end
   inherited pnCorpoTela: TPanel
+    Width = 570
     object lbl_edtdb_id: TLabel
       Left = 24
       Top = 8
@@ -139,20 +145,6 @@ inherited frmAluno: TfrmAluno
       ParentFont = False
       TabOrder = 4
     end
-    object cmbdb_sexo: TDBComboBox
-      Left = 141
-      Top = 103
-      Width = 145
-      Height = 24
-      Style = csDropDownList
-      DataField = 'SEXO'
-      DataSource = dmAluno.dsCadastro
-      Items.Strings = (
-        'M - Masculino'
-        'F  - Feminino'
-        'O - Outro')
-      TabOrder = 3
-    end
     object edtdb_serie: TDBEdit
       Left = 415
       Top = 103
@@ -161,6 +153,21 @@ inherited frmAluno: TfrmAluno
       DataField = 'SERIE'
       DataSource = dmAluno.dsCadastro
       TabOrder = 5
+    end
+    object edtdb_sexo: TDBEdit
+      Left = 141
+      Top = 103
+      Width = 145
+      Height = 24
+      DataField = 'SEXO'
+      DataSource = dmAluno.dsCadastro
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
     end
   end
 end

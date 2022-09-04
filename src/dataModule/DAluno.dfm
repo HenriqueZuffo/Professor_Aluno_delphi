@@ -33,13 +33,6 @@ inherited dmAluno: TdmAluno
       EditMask = '000\.000\.000\-00;1;_'
       Size = 14
     end
-    object queryCadastroSEXO: TStringField
-      FieldName = 'SEXO'
-      Origin = 'SEXO'
-      ProviderFlags = [pfInUpdate]
-      FixedChar = True
-      Size = 1
-    end
     object queryCadastroDATA_NASCIMENTO: TDateField
       FieldName = 'DATA_NASCIMENTO'
       Origin = 'DATA_NASCIMENTO'
@@ -56,6 +49,13 @@ inherited dmAluno: TdmAluno
       FieldName = 'SERIE'
       Origin = 'SERIE'
       ProviderFlags = [pfInUpdate]
+    end
+    object queryCadastroSEXO: TStringField
+      FieldName = 'SEXO'
+      Origin = 'SEXO'
+      ProviderFlags = [pfInUpdate]
+      FixedChar = True
+      Size = 50
     end
   end
 end

@@ -13,10 +13,10 @@ type
     queryCadastroID: TIntegerField;
     queryCadastroNOME: TStringField;
     queryCadastroCPF: TStringField;
-    queryCadastroSEXO: TStringField;
     queryCadastroDATA_NASCIMENTO: TDateField;
     queryCadastroEMAIL: TStringField;
     queryCadastroSERIE: TIntegerField;
+    queryCadastroSEXO: TStringField;
   private
     { Private declarations }
   public
@@ -47,7 +47,6 @@ begin
     on e: exception do begin
       dmConexaoBanco.base.Rollback;
       raise Exception.Create(e.Message);
-      abort;
     end;
   end;
 end;
@@ -75,7 +74,6 @@ begin
       on e: exception do begin
         dmConexaoBanco.base.Rollback;
         raise Exception.Create(e.Message);
-        abort;
       end;
     end;
   finally

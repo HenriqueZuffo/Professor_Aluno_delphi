@@ -7,6 +7,9 @@ uses
 
 type
   TAluno = class(TPessoa)
+  private
+    class procedure excluirRelacionamentoProfessor(const id: integer);
+
   public
     serie: integer;
 
@@ -39,9 +42,27 @@ const
 begin
   inherited;
   try
+    excluirRelacionamentoProfessor(id);
+
     dmConexaoBanco.queryGenerica.SQL.Clear;
     dmConexaoBanco.queryGenerica.SQL.Add(query);
     dmConexaoBanco.queryGenerica.ParamByName('ID').AsInteger := id;
+    dmConexaoBanco.queryGenerica.ExecSQL;
+  except
+    on e: exception do begin
+      raise Exception.Create(e.Message);
+    end;
+  end;
+end;
+
+class procedure TAluno.excluirRelacionamentoProfessor(const id: integer);
+const
+  query = 'delete from professor_aluno where id_aluno = :aluno';
+begin
+  try
+    dmConexaoBanco.queryGenerica.SQL.Clear;
+    dmConexaoBanco.queryGenerica.SQL.Add(query);
+    dmConexaoBanco.queryGenerica.ParamByName('ALUNO').AsInteger := id;
     dmConexaoBanco.queryGenerica.ExecSQL;
   except
     on e: exception do begin

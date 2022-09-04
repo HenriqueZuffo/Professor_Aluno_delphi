@@ -2,6 +2,9 @@ unit uUtils;
 
 interface
 
+uses
+  Data.DB;
+
 type
   TMessageBoxOption = (moSim, moNao, moCancelar, moSimParaTodos, moNaoParaTodos);
   TMessageBoxIcone = (miErro, miPergunta, miAtencao, miInformacao);

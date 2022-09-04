@@ -2,7 +2,7 @@ CREATE TABLE aluno(
 	id integer NOT NULL,
 	nome varchar(200) NOT NULL,
 	cpf varchar(14),
-	sexo char(1),
+	sexo VARCHAR(50),
 	data_nascimento date,
 	email varchar(300),
 	serie integer
@@ -24,7 +24,7 @@ CREATE TABLE professor(
 	id integer NOT NULL,
 	nome varchar(200) NOT NULL,
 	cpf varchar(14),
-	sexo char(1),
+	sexo VARCHAR(50),
 	data_nascimento date,
 	email varchar(300),
 	disciplina varchar(50)
@@ -47,7 +47,7 @@ CREATE TABLE professor_aluno(
 	id_aluno integer NOT NULL,
 	ano integer,
 	nota_primeiro_bimestre double PRECISION,
-	nota_segunda_bimestre double PRECISION,
+	nota_segundo_bimestre double PRECISION,
 	nota_terceiro_bimestre double PRECISION,
 	nota_quarto_bimestre double precision
 )
