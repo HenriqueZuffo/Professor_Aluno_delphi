@@ -6,8 +6,6 @@ uses
   uPessoa, System.Classes, System.Generics.Collections, uConexaoBanco;
 
 type
-  TTipoExclusao = (teProfessor, teAluno);
-
   TProfessor = class(TPessoa)
   type
     TAlunoProfessor = class
@@ -22,7 +20,6 @@ type
 
   private
     class procedure excluirAlunos(const id_professor: integer);
-    class procedure excluirAluno(const id_aluno, id_professor: integer);
     class procedure excluirProfessor(const id: integer);
 
   public
@@ -30,8 +27,7 @@ type
     alunosProfessor: TList<TAlunoProfessor>;
 
     procedure salvar; override;
-    class procedure excluir(const id: integer;
-      const tipoExclusao: TTipoExclusao; const id_aluno: integer = 0); overload;
+    class procedure excluir(const id: integer); override;
 
     constructor create(ANome: string); override;
     destructor destroy; override;
@@ -57,32 +53,10 @@ begin
   inherited;
 end;
 
-class procedure TProfessor.excluir(const id: integer;
-  const tipoExclusao: TTipoExclusao; const id_aluno: integer = 0);
+class procedure TProfessor.excluir(const id: integer);
 begin
-  case tipoExclusao of
-    teProfessor:
-      excluirProfessor(id);
-    teAluno:
-      excluirAluno(id_aluno, id);
-  end;
-end;
-
-class procedure TProfessor.excluirAluno(const id_aluno, id_professor: integer);
-const
-  query = 'delete from professor_aluno where id_professor = :professor and id_aluno = :aluno';
-begin
-  try
-    dmConexaoBanco.queryGenerica.SQL.Clear;
-    dmConexaoBanco.queryGenerica.SQL.Add(query);
-    dmConexaoBanco.queryGenerica.ParamByName('PROFESSOR').AsInteger := id_professor;
-    dmConexaoBanco.queryGenerica.ParamByName('ALUNO').AsInteger := id_aluno;
-    dmConexaoBanco.queryGenerica.ExecSQL;
-  except
-    on e: exception do begin
-      raise Exception.Create(e.Message);
-    end;
-  end;
+  excluirAlunos(id);
+  excluirProfessor(id);
 end;
 
 class procedure TProfessor.excluirAlunos(const id_professor: integer);
